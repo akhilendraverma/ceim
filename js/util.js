@@ -17,7 +17,9 @@ window.CEIM = {
   ],
   skills: [],
   add(cls, subject, list) {
-    list.forEach((s, i) => this.skills.push({ ...s, cls, subject, id: `${cls}-${subject}-${i + 1}` }));
+    // Numbering continues from earlier lists, so new files can add more skills to a class without changing old ids.
+    const start = this.skills.filter((s) => s.cls === cls && s.subject === subject).length;
+    list.forEach((s, i) => this.skills.push({ ...s, cls, subject, id: `${cls}-${subject}-${start + i + 1}` }));
   },
 };
 

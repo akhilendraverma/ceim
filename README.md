@@ -1,14 +1,15 @@
 # Céim: primary school practice
 
 Free Maths, English and Gaeilge practice for Irish primary school children, Junior Infants to Sixth Class.
-102 skills: Maths questions are generated fresh every time; English and Gaeilge questions come from word and sentence lists.
+203 skills (Maths 102, English 75, Gaeilge 26): Maths questions are generated fresh every time; English and Gaeilge questions come from word and sentence lists.
 No accounts, no ads, no tracking. Stars are saved in the browser (localStorage) only.
 
 ## Files
 - `index.html`: the page shell
 - `css/style.css`: the design
 - `js/util.js`: helpers and the list of classes/subjects
-- `js/maths.js`, `js/english.js`, `js/gaeilge.js`: the skills, grouped by class
+- `js/maths.js`, `js/maths2.js`, `js/english.js`, `js/english2.js`, `js/gaeilge.js`: the skills, grouped by class
+  (load order matters: the part-2 files add more skills after the first files)
 - `js/app.js`: home, class pages, practice rounds, stars, Parents & teachers page (contact email at the top)
 - `sw.js`, `manifest.webmanifest`, `icons/`: offline support and app install
 

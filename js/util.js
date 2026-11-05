@@ -9,6 +9,9 @@ window.CEIM = {
     { id: "c4", name: "Fourth Class", short: "4", color: "#D63F8C" },
     { id: "c5", name: "Fifth Class", short: "5", color: "#0E8C7A" },
     { id: "c6", name: "Sixth Class", short: "6", color: "#B5651D" },
+    { id: "y1", name: "First Year", short: "1Y", color: "#3949AB", junior: true },
+    { id: "y2", name: "Second Year", short: "2Y", color: "#546E7A", junior: true },
+    { id: "y3", name: "Third Year", short: "3Y", color: "#B71C1C", junior: true, note: "Junior Cert" },
   ],
   subjects: [
     { id: "maths", name: "Maths", ga: "Mata" },

@@ -1,6 +1,6 @@
 /* Céim service worker: works offline after the first visit */
-const CACHE = "ceim-v2";
-const ASSETS = ["./", "./index.html", "./css/style.css", "./js/util.js", "./js/maths.js", "./js/english.js", "./js/gaeilge.js", "./js/maths2.js", "./js/english2.js", "./js/app.js",
+const CACHE = "ceim-v4";
+const ASSETS = ["./", "./index.html", "./css/style.css", "./js/util.js", "./js/maths.js", "./js/english.js", "./js/gaeilge.js", "./js/maths2.js", "./js/english2.js", "./js/junior-maths.js", "./js/junior-english.js", "./js/junior-gaeilge.js", "./js/app.js",
   "./manifest.webmanifest", "./icons/icon-192.png", "./icons/icon-512.png", "./icons/icon-maskable-512.png", "./icons/apple-touch-icon.png"];
 const FONT_HOSTS = ["fonts.googleapis.com", "fonts.gstatic.com"];
 self.addEventListener("install", (e) => e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS)).then(() => self.skipWaiting())));

@@ -168,3 +168,10 @@ main { max-width: 1140px; margin: 0 auto; padding: 0 20px 40px; outline: none; }
   .groups .objs { font-size: 26px; letter-spacing: 1px; }
   .groups .op { font-size: 28px; }
 }
+
+
+/* Primary / Junior Cycle groups */
+.group-h { font-size: 26px; margin: 26px 0 14px; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.group-h small { font: 600 15px var(--body); color: var(--muted); }
+.card-head h2 small, .class-head h1 small.note { font: 700 14px var(--body); background: var(--c); color: #fff; padding: 3px 10px; border-radius: 999px; vertical-align: middle; }
+.badge { font-size: 16px; }

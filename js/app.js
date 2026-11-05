@@ -40,27 +40,32 @@
   // ---------- pages ----------
   function home() {
     const total = CEIM.skills.length, earned = CEIM.skills.reduce((a, s) => a + stars(s.id), 0);
-    const cards = CEIM.classes.map((c) => {
+    const card = (c) => {
       const rows = CEIM.subjects.map((sub) => {
         const list = skillsOf(c.id, sub.id), got = list.reduce((a, s) => a + stars(s.id), 0);
         return `<a class="row" href="#/class/${c.id}/${sub.id}"><span>${SUBJ_ICON[sub.id]} ${sub.name}</span><span class="count">${list.length} skills ›</span>${got ? `<span class="mini">★ ${got}</span>` : ""}</a>`;
       }).join("");
       const sampleTopics = [skillsOf(c.id, "maths")[0], skillsOf(c.id, "english")[0], skillsOf(c.id, "gaeilge")[0]]
-        .map((s) => s.title.toLowerCase().replace(/:.*$/, "").replace(/\?$/, "")).join(", ");
+        .map((s) => (/^(Shakespeare|[A-Z]{2})/.test(s.title) ? s.title : s.title.toLowerCase()).replace(/:.*$/, "").replace(/\?$/, "")).join(", ");
       return `<article class="card" style="--c:${c.color}">
-        <a class="card-head" href="#/class/${c.id}"><span class="badge">${c.short}</span><h2>${c.name}</h2></a>
+        <a class="card-head" href="#/class/${c.id}"><span class="badge">${c.short}</span><h2>${c.name}${c.note ? ` <small>${c.note}</small>` : ""}</h2></a>
         <p class="topics">${E(sampleTopics[0].toUpperCase() + sampleTopics.slice(1))} and more.</p>
         <div class="rows">${rows}</div>
       </article>`;
-    }).join("");
+    };
+    const primary = CEIM.classes.filter((c) => !c.junior).map(card).join("");
+    const junior = CEIM.classes.filter((c) => c.junior).map(card).join("");
     app.innerHTML = `
       <section class="hero">
         <h1>Practise one <span class="hl">céim</span> at a time</h1>
-        <p>Free Maths, English and Gaeilge practice for primary school, from Junior Infants to Sixth Class.
+        <p>Free Maths, English and Gaeilge practice from Junior Infants all the way to the Junior Cert.
         Pick your class, choose a skill and answer ${ROUND} questions to earn up to three stars.</p>
         ${earned ? `<p class="earned">You have <b>${earned}</b> of ${total * 3} stars so far. Maith thú!</p>` : ""}
       </section>
-      <section class="cards">${cards}</section>`;
+      <h2 class="group-h">Primary school <small>Junior Infants to Sixth Class</small></h2>
+      <section class="cards">${primary}</section>
+      <h2 class="group-h">Junior Cycle <small>First Year to the Junior Cert</small></h2>
+      <section class="cards">${junior}</section>`;
   }
 
   function classPage(cid, focus) {
@@ -74,7 +79,7 @@
       return `<section class="subject ${focus === sub.id ? "focus" : ""}" id="s-${sub.id}"><h2>${SUBJ_ICON[sub.id]} ${sub.name}${sub.ga !== sub.name ? ` <small lang="ga">${sub.ga}</small>` : ""}</h2><ol class="skills">${items}</ol></section>`;
     }).join("");
     app.innerHTML = `
-      <div class="class-head" style="--c:${c.color}"><a href="#/" class="back">‹ All classes</a><h1><span class="badge">${c.short}</span>${c.name}</h1></div>
+      <div class="class-head" style="--c:${c.color}"><a href="#/" class="back">‹ All classes</a><h1><span class="badge">${c.short}</span>${c.name}${c.note ? ` <small class="note">${c.note}</small>` : ""}</h1></div>
       <div class="subjects">${cols}</div>`;
     if (focus) { const el = document.getElementById("s-" + focus); if (el && window.innerWidth < 900) el.scrollIntoView(); }
   }
@@ -210,7 +215,7 @@
     const n = (sub) => CEIM.skills.filter((s) => s.subject === sub).length;
     app.innerHTML = `<div class="page prose">
       <h1>For parents and teachers</h1>
-      <p><b>Céim</b> (Irish for “step”) is free practice for primary school children in Ireland, from Junior Infants to Sixth Class.
+      <p><b>Céim</b> (Irish for “step”) is free practice for children and teenagers in Ireland, from Junior Infants to Third Year (the Junior Cert).
       It has ${CEIM.skills.length} skills: ${n("maths")} in Maths, ${n("english")} in English and ${n("gaeilge")} in Gaeilge, following topics
       commonly taught in each class.</p>
       <h2>How it works</h2>
